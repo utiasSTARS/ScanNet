@@ -18,10 +18,10 @@ import inspect
 try:
     import numpy as np
 except:
-    print "Failed to import numpy package."
+    print("Failed to import numpy package.")
     sys.exit(-1)
 try:
-    import imageio
+    import imageio.v2 as imageio
 except:
     print("Please install the module 'imageio' for image processing, e.g.")
     print("pip install imageio")
@@ -41,7 +41,7 @@ opt = parser.parse_args()
 
 def map_label_image(image, label_mapping):
     mapped = np.copy(image)
-    for k,v in label_mapping.iteritems():
+    for k,v in label_mapping.items():
         mapped[image==k] = v
     return mapped.astype(np.uint8)
 
@@ -52,7 +52,7 @@ def main():
     mapped_image = map_label_image(image, label_map)
     imageio.imwrite(opt.output_file, mapped_image)
     # uncomment to save out visualization
-    # util.visualize_label_image(os.path.splitext(opt.output_file)[0] + '_vis.jpg', mapped_image)
+    util.visualize_label_image(os.path.splitext(opt.output_file)[0] + '_vis.jpg', mapped_image)
 
 
 if __name__ == '__main__':
